@@ -24,15 +24,14 @@
 (defmethod source-file-type ((c test-vector-file) (s module)) "testvec")
 
 (asdf:defsystem :binascii/tests
-  :depends-on (binascii)
+  :depends-on (binascii rt)
   :version "1.0"
   :perform (test-op (op c)
              (or (symbol-call :rtest :do-tests)
                  (error "TEST-OP failed for BINASCII-TESTS")))
   :components ((:module "tests"
                         :components
-                        ((:file "rt")
-                         (:file "tests" :depends-on ("rt"))
+                        ((:file "tests")
                          (:test-vector-file "ascii85")
                          (:test-vector-file "base85")
                          (:test-vector-file "base64")
